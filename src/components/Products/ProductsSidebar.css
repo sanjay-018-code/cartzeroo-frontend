@@ -1,0 +1,21 @@
+.products_sidebar{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.products_sidebar > h2{
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.category_links{
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.category_links .sidebar_link{
+    width: 100%;
+    align-items: center;
+}
