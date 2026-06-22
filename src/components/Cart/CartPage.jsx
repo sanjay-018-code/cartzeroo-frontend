@@ -6,6 +6,7 @@ import Table from '../Common/Table'
 import QuantityInput from '../SingleProduct/QuantityInput';
 import UserContext from '../../contexts/UserContext';
 import CartContext from '../../contexts/CartContext';
+import config from '../../config.json'
 
 import remove from '../../assets/remove.png'
 import { checkoutAPI } from '../../services/orderServices';
@@ -39,7 +40,7 @@ const CartPage = () => {
   return (
     <section className="aligncenter cart_page">
         <div className="aligncenter user_info">
-            <img src={`http://localhost:5000/profile/${user?.profilePic}`} alt="user profile" />
+            <img src={`${config.backendUrl}/profile/${user?.profilePic}`} alt="user profile" />
             <div>
                 <p className="user_name">Name: {user?.name} </p>
                 <p className="user_email">Email: {user?.email} </p>

@@ -6,6 +6,7 @@ import QuantityInput from './QuantityInput';
 import { useParams, useLocation } from 'react-router-dom';
 import CartContext from '../../contexts/CartContext';
 import UserContext from '../../contexts/UserContext';
+import config from "../../config.json" 
 
 
 const SingleProductPage = () => {
@@ -26,10 +27,10 @@ const SingleProductPage = () => {
             {product && <><div className="aligncenter">
                 <div className="single_product_thumbnails">
                     {
-                        product.images.map((image, index)=> <img src={`http://localhost:5000/products/${image}`} alt={product.title} className={selectedImage === index ? "selected_image" : ""} onClick={()=> setSelectedImage(index)} />)
+                        product.images.map((image, index)=> <img src={`${config.backendUrl}/products/${image}`} alt={product.title} className={selectedImage === index ? "selected_image" : ""} onClick={()=> setSelectedImage(index)} />)
                     }
                 </div>
-                <img src={`http://localhost:5000/products/${product.images[selectedImage]}`} alt={product.title} className='single_product_display' />
+                <img src={`${config.backendUrl}/products/${product.images[selectedImage]}`} alt={product.title} className='single_product_display' />
             </div>
             <div className="single_product_details">
                 <h1 className="single_product_title">{product.title}</h1>
