@@ -5,17 +5,26 @@ const useData = (endpoint, customConfig, deps) => {
     const [data, setdata] = useState(null)
     const [error, seterror] = useState("")
     const [isLoading, setisLoading] = useState(false)
-  
+
     useEffect(() => {
+        let isMounted = true
         setisLoading(true)
         apiClient.get(endpoint, customConfig).then(res=> {
-            if(endpoint="/products" && data && data.products && customConfig.params.page !== 1 ){
+            if (!isMounted) return
+            if (endpoint === "/products" && data && data.products && customConfig?.params?.page !== 1) {
                 setdata(prev=>({...prev, products: [...prev.products, ...res.data.products]}))
-            }else{    
-                setdata(res.data); 
+            } else {
+                setdata(res.data)
             }
-            setisLoading(false)}).catch(err=> {seterror(err.message); setisLoading(false)})
-    }, deps ? deps: [])
+            setisLoading(false)
+        }).catch(err=> {
+            if (!isMounted) return
+            seterror(err.message)
+            setisLoading(false)
+        })
+
+        return () => { isMounted = false }
+    }, deps ? deps : [endpoint, customConfig ? JSON.stringify(customConfig) : null])
 
     return {data, error, isLoading}
 }

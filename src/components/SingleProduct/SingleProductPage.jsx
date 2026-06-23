@@ -21,16 +21,33 @@ const SingleProductPage = () => {
 
     const {data: product, error, isLoading} = useData(`/products/${id}`)
     
+    const images = product?.images || []
+    const selectedImageSrc = images[selectedImage] || images[0] || ''
+
     return (
         <section className='aligncenter single_product' >
             {error && <em className='form-error' >{error.message}</em> }
             {product && <><div className="aligncenter">
                 <div className="single_product_thumbnails">
                     {
-                        product.images.map((image, index)=> <img src={`${config.backendUrl}/products/${image}`} alt={product.title} className={selectedImage === index ? "selected_image" : ""} onClick={()=> setSelectedImage(index)} />)
+                        images.map((image, index)=> (
+                            <img
+                                key={`${image}-${index}`}
+                                src={`${config.backendUrl}/products/${image}`}
+                                alt={product.title}
+                                className={selectedImage === index ? "selected_image" : ""}
+                                onClick={()=> setSelectedImage(index)}
+                            />
+                        ))
                     }
                 </div>
-                <img src={`${config.backendUrl}/products/${product.images[selectedImage]}`} alt={product.title} className='single_product_display' />
+                {selectedImageSrc && (
+                    <img
+                        src={`${config.backendUrl}/products/${selectedImageSrc}`}
+                        alt={product.title}
+                        className='single_product_display'
+                    />
+                )}
             </div>
             <div className="single_product_details">
                 <h1 className="single_product_title">{product.title}</h1>
