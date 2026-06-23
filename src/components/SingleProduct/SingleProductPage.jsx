@@ -7,7 +7,6 @@ import config from "../../config.json";
 import QuantityInput from "./QuantityInput";
 import { useParams } from "react-router-dom";
 import useData from "../../hooks/useData";
-import Loader from "./../Common/Loader";
 import CartContext from "../../contexts/CartContext";
 import UserContext from "../../contexts/UserContext";
 
@@ -24,7 +23,7 @@ const SingleProductPage = () => {
     return (
         <section className='align_center single_product'>
             {error && <em className='form_error'>{error}</em>}
-            {isLoading && <Loader />}
+            {isLoading && <em>Please Wait!!!</em>}
             {product && (
                 <>
                     <div className='align_center'>
