@@ -19,7 +19,7 @@ const SingleProductPage = () => {
 
     const { id } = useParams();
 
-    const { data: product, error, isLoading } = useData(`/product/${id}`);
+    const { data: product, error, isLoading } = useData(`/products/${id}`);
     return (
         <section className='align_center single_product'>
             {error && <em className='form_error'>{error}</em>}
